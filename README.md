@@ -15,30 +15,26 @@ The purpose of the estimation project is to implement a realistic estimator to m
 
 
 ### Step 1: Sensor Noise ###
-
-For the sake of this first step, a bunch of GPS and Accelerometers datas were provided to us. The aim of this part was to reacalculate the standart deviation from this datas recorder over 10seconds at 10Hz for the GPS and a lot more for the accelerometer
+#### Set the sensors noise ####
+For the sake of this first step, a bunch of GPS and Accelerometers datas were provided to us. The aim of this part was to reacalculate the standard deviation from this datas recorded over 10 seconds at a frequency of 10Hz for the GPS and a lot more for the accelerometer. As the standard deviation follows a gaussian distribution, the calculated standard deviation was suppose to capture ~68% of the sensor mesurements. The STDs calculated we added it to the config/6_Sensornoise.txt file, linked the MeasuredStdDev_GPSPosXY and MeasuredStdDev_AccelXY values.
 
 ![noise example](images/noise.gif)
 
 
 ### Step 2: Attitude Estimation ###
 
-Now let's look at the first step to our state estimation: including information from our IMU.  In this step, you will be improving the complementary filter-type attitude filter with a better rate gyro attitude integration scheme.
+To estimate the attitude we use a complementary filter. To do so and to make our attitude estimate as accurate as possible we need to use to mesurmeent of attitude, one whose come from the accelerometer and the other from the gyros. Neither of this mesurements alone can provide a reliable and responsive attitude estimate but taking together they do. There are two ways to implement the complementary filter. The linear approach which allows only smalls angle when for example the drone is close from hovering. The non-linear approach is trickier and this is the one we implemented in the project. This approach allows the drone to work for any attitude. As we get the rate in the body frame we first need to translate them to the inertial frame. We could use Eulers angle as a good representation of world frame angle but we chose the quaternions which are more robusts. We used the methods FromEuler123_RPY and .IntegrateBodyRate which make it easier to work with this attitude representation. Nevertheless the transformation matrix can be found in "Representing attitude: Euler angles, unit quaternions, and rotation vectors." from John Diebel
 
-1. Run scenario `07_AttitudeEstimation`.  For this simulation, the only sensor used is the IMU and noise levels are set to 0 (see `config/07_AttitudeEstimation.txt` for all the settings for this simulation).  There are two plots visible in this simulation.
-   - The top graph is showing errors in each of the estimated Euler angles.
-   - The bottom shows the true Euler angles and the estimates.
-Observe that there’s quite a bit of error in attitude estimation.
+What does FromEuler123_RPY function do:
+![noise example](images/euler_to_quaternions.png)
 
-2. In `QuadEstimatorEKF.cpp`, you will see the function `UpdateFromIMU()` contains a complementary filter-type attitude filter.  To reduce the errors in the estimated attitude (Euler Angles), implement a better rate gyro attitude integration scheme.  You should be able to reduce the attitude errors to get within 0.1 rad for each of the Euler angles, as shown in the screenshot below.
+How to get Pitch and roll back from quaternions:
+![noise example](images/quaternions_to_euler.png)
 
-![attitude example](images/attitude-screenshot.png)
+Using this predicated estimate we can then uptade the estimated attitude:
+![noise example](images/attitude_update_from_IMU.png)
 
-In the screenshot above the attitude estimation using linear scheme (left) and using the improved nonlinear scheme (right). Note that Y axis on error is much greater on left.
-
-***Success criteria:*** *Your attitude estimator needs to get within 0.1 rad for each of the Euler angles for at least 3 seconds.*
-
-**Hint: see section 7.1.2 of [Estimation for Quadrotors](https://www.overleaf.com/read/vymfngphcccj) for a refresher on a good non-linear complimentary filter for attitude using quaternions.**
+![noise example](images/attitude_estimation.gifnoise.gif)
 
 
 ### Step 3: Prediction Step ###
