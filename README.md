@@ -37,7 +37,7 @@ Using this predicated estimate we can then uptade the estimated attitude:
 
 ![attitude_update_from_IMU](images/attitude_update_from_IMU.PNG)
 
-![attitude_estimation](images/attitude_estimation.gif)
+![attitude_estimation](images/attitude_estimation2.gif)
 
 
 ### Step 3: Prediction Step ###
