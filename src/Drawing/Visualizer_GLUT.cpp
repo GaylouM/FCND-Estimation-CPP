@@ -521,6 +521,10 @@ void Visualizer_GLUT::DrawBottomStatus(float simTime)
 {
   char buf[100];
 
+  if (simTime >= 10) {
+	  system("PAUSE");
+  }
+
   sprintf_s(buf, 100, "%s t=%.3f%s", _scenarioName.c_str(), simTime, paused?" Paused":"");
   
   glColor3f(0, 0, 1);
