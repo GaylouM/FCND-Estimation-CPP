@@ -20,6 +20,13 @@ For the sake of this first step, a bunch of GPS and Accelerometers datas were pr
 
 ![noise example](images/noise.gif)
 
+#### Note to the reviewer: ####
+
+![noise example](images/code.png)
+
+I caught the location in the code were the time elapsed was displayed, and saved after 10 seconds the content of Graph1 and Graph2 in two .csv files. I did it to be sure to have all the mesures.
+I then process the standard deviation in Excel. You can find those files and the formulas in logs. The graph files are in diverse extensions (.txt, .ods, .xls, .csv) for OS compatibility and to keep the formulas and raw values.
+
 
 ### Step 2: Attitude Estimation ###
 #### Implement the non linear complementary filter for accelerometer and gyroscope sensors ####
