@@ -49,14 +49,14 @@ The prediction step consists in implementing the transition function and then to
 ![predict_state](images/predict_state.gif)
 
 ### Step 4: Magnetometer Update ###
-#### Implement the magnetometer update ####
+#### Implement the magnetometer update (with controller) ####
 
 Up until now we've only used the accelerometer and gyro for our state estimation.  In this step, we added the information from the magnetometer to improve our filter's performance in estimating the vehicle's heading.
 
 ![predict_state](images/update_mag.gif)
 
-### Step 5: Closed Loop + GPS Update ###
-#### Implement the magnetometer update ####
+### Step 5: Closed Loop + GPS Update (with controller) ###
+#### Implement the GPS update ####
 
 ![predict_state](images/update_GPS.gif)
 
