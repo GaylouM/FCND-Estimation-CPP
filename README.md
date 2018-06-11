@@ -46,7 +46,7 @@ Using this predicated estimate we can then uptade the estimated attitude:
 
 The prediction step consists in implementing the transition function and then to take the Jacobian to solve the non-linearity and update the covariance matrix. We are working with 3 fuctions: PredictState which update the first member of the transition function, GetRbgPrime which participate in building the Jacobian matrix, PredictState to predict the state forward using the output of GetRbgPrime to build the gPrime which is the Jacobian matrix itself.
 
-![attitude_estimation](images/predict_state.gif)
+![predict_state](images/predict_state.gif)
 
 ### Step 4: Magnetometer Update ###
 
