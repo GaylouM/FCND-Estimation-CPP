@@ -26,15 +26,15 @@ For the sake of this first step, a bunch of GPS and Accelerometers datas were pr
 To estimate the attitude we use a complementary filter. To do so and to make our attitude estimate as accurate as possible we need to use to mesurmeent of attitude, one whose come from the accelerometer and the other from the gyros. Neither of this mesurements alone can provide a reliable and responsive attitude estimate but taking together they do. There are two ways to implement the complementary filter. The linear approach which allows only smalls angle when for example the drone is close from hovering. The non-linear approach is trickier and this is the one we implemented in the project. This approach allows the drone to work for any attitude. As we get the rate in the body frame we first need to translate them to the inertial frame. We could use Eulers angle as a good representation of world frame angle but we chose the quaternions which are more robusts. We used the methods FromEuler123_RPY and .IntegrateBodyRate which make it easier to work with this attitude representation. Nevertheless the transformation matrix can be found in "Representing attitude: Euler angles, unit quaternions, and rotation vectors." from John Diebel
 
 What does FromEuler123_RPY function do:
-![noise example](images/euler_to_quaternions.png)
+![euler_to_quaternions](images/euler_to_quaternions.png)
 
 How to get Pitch and roll back from quaternions:
-![noise example](images/quaternions_to_euler.png)
+![quaternions_to_euler](images/quaternions_to_euler.png)
 
 Using this predicated estimate we can then uptade the estimated attitude:
-![noise example](images/attitude_update_from_IMU.png)
+![attitude_update_from_IMU](images/attitude_update_from_IMU.png)
 
-![noise example](images/attitude_estimation.gifnoise.gif)
+![attitude_estimation](images/attitude_estimation.gif)
 
 
 ### Step 3: Prediction Step ###
