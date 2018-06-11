@@ -59,3 +59,7 @@ Up until now we've only used the accelerometer and gyro for our state estimation
 #### Implement the magnetometer update ####
 
 ![predict_state](images/update_GPS.gif)
+
+### Monte Carlo Test ###
+
+![montecarlo](images/montecarlo.PNG)
